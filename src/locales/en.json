@@ -4,7 +4,23 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "language": "Language"
+    "language": "Language",
+    "main": "Main navigation"
+  },
+  "features": {
+    "title": "Features",
+    "fast": {
+      "title": "Lightning Fast",
+      "desc": "Zero-config Parcel bundler with HMR and optimized builds."
+    },
+    "i18n": {
+      "title": "Multi-language",
+      "desc": "Build-time i18n with static HTML per locale."
+    },
+    "themes": {
+      "title": "Dark & Light",
+      "desc": "Theme toggle with system preference detection."
+    }
   },
   "dashboard": {
     "title": "Live System Dashboard",
@@ -13,7 +29,28 @@
     "load": "Load",
     "serverTime": "Server Time",
     "operational": "OPERATIONAL",
-    "critical": "CRITICAL"
+    "critical": "CRITICAL",
+    "error": "Unable to reach the server. Retrying...",
+    "percent": "percent"
+  },
+  "counter": {
+    "title": "Interactive Counter",
+    "description": "A simple Alpine.js reactive counter.",
+    "reset": "Reset",
+    "controls": "Counter controls",
+    "increment": "Increase count",
+    "decrement": "Decrease count"
+  },
+  "about": {
+    "title": "About This Project",
+    "p1": "Parcel Cornerstone is a lightweight template for building static sites with serverless API routes, build-time internationalization, and reactive UI components.",
+    "stack": {
+      "parcel": "Parcel v2 — zero-config bundler with HMR",
+      "tailwind": "Tailwind CSS v4 — utility-first styling",
+      "alpine": "Alpine.js v3 — lightweight reactivity",
+      "posthtml": "PostHTML Expressions — build-time templating & i18n"
+    },
+    "p2": "Deploy anywhere: Vercel, Netlify, or any static host."
   },
   "notFound": {
     "title": "Page Not Found",
@@ -22,7 +59,9 @@
     "backHome": "Back to home"
   },
   "darkMode": {
-    "toggle": "Toggle dark mode"
+    "toggle": "Toggle dark mode",
+    "light": "Switch to light mode",
+    "dark": "Switch to dark mode"
   },
   "footer": {
     "copy": "Parcel Cornerstone. All rights reserved."

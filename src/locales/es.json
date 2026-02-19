@@ -4,7 +4,23 @@
   "nav": {
     "home": "Inicio",
     "about": "Acerca de",
-    "language": "Idioma"
+    "language": "Idioma",
+    "main": "Navegación principal"
+  },
+  "features": {
+    "title": "Características",
+    "fast": {
+      "title": "Ultra Rápido",
+      "desc": "Bundler Parcel sin configuración con HMR y builds optimizados."
+    },
+    "i18n": {
+      "title": "Multi-idioma",
+      "desc": "i18n en tiempo de build con HTML estático por idioma."
+    },
+    "themes": {
+      "title": "Oscuro y Claro",
+      "desc": "Cambio de tema con detección de preferencia del sistema."
+    }
   },
   "dashboard": {
     "title": "Panel del Sistema en Vivo",
@@ -13,7 +29,28 @@
     "load": "Carga",
     "serverTime": "Hora del Servidor",
     "operational": "OPERATIVO",
-    "critical": "CRÍTICO"
+    "critical": "CRÍTICO",
+    "error": "No se pudo conectar al servidor. Reintentando...",
+    "percent": "por ciento"
+  },
+  "counter": {
+    "title": "Contador Interactivo",
+    "description": "Un contador reactivo simple con Alpine.js.",
+    "reset": "Reiniciar",
+    "controls": "Controles del contador",
+    "increment": "Incrementar",
+    "decrement": "Decrementar"
+  },
+  "about": {
+    "title": "Acerca del Proyecto",
+    "p1": "Parcel Cornerstone es una plantilla ligera para crear sitios estáticos con rutas API serverless, internacionalización en tiempo de build y componentes de UI reactivos.",
+    "stack": {
+      "parcel": "Parcel v2 — bundler sin configuración con HMR",
+      "tailwind": "Tailwind CSS v4 — estilos utility-first",
+      "alpine": "Alpine.js v3 — reactividad ligera",
+      "posthtml": "PostHTML Expressions — plantillas & i18n en tiempo de build"
+    },
+    "p2": "Despliega en cualquier lugar: Vercel, Netlify o cualquier host estático."
   },
   "notFound": {
     "title": "Página No Encontrada",
@@ -22,7 +59,9 @@
     "backHome": "Volver al inicio"
   },
   "darkMode": {
-    "toggle": "Cambiar modo oscuro"
+    "toggle": "Cambiar modo oscuro",
+    "light": "Cambiar a modo claro",
+    "dark": "Cambiar a modo oscuro"
   },
   "footer": {
     "copy": "Parcel Cornerstone. Todos los derechos reservados."

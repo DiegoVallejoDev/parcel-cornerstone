@@ -1,12 +1,15 @@
 <div x-data="{
     status: null,
     loading: true,
+    error: false,
     async fetchStatus() {
         try {
             const res = await fetch('/api/status');
             this.status = await res.json();
+            this.error = false;
         } catch (e) {
             console.error('[Dashboard] Fetch failed', e);
+            this.error = true;
         } finally {
             this.loading = false;
         }
@@ -15,23 +18,54 @@
         this.fetchStatus();
         setInterval(() => this.fetchStatus(), 5000);
     }
-}" class="rounded">
+}" class="rounded" role="region" aria-label="{{ ui.dashboard.title }}">
     <template x-if="loading">
-        <div class="h-32 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded animate-pulse">
+        <div class="h-32 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg animate-pulse"
+            role="status">
+            <svg class="w-5 h-5 mr-2 text-gray-400 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
             <span class="text-gray-400 text-sm">{{ ui.dashboard.loading }}</span>
         </div>
     </template>
-    <template x-if="!loading && status">
-        <div class="p-4 border rounded shadow-sm transition-colors duration-300"
-            :class="status.cpu > 80 ? 'bg-red-50 dark:bg-red-900/20' : 'bg-green-50 dark:bg-green-900/20'">
-            <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase"
-                x-text="'{{ ui.dashboard.status }}'"></h3>
-            <div class="mt-2 flex items-center justify-between">
-                <span class="text-2xl font-mono" :class="status.cpu > 80 ? 'text-red-600' : 'text-green-600'"
-                    x-text="status.cpu > 80 ? '{{ ui.dashboard.critical }}' : '{{ ui.dashboard.operational }}'"></span>
-                <span class="text-xs text-gray-400" x-text="'{{ ui.dashboard.load }}: ' + status.cpu + '%'"></span>
+    <template x-if="error && !loading">
+        <div class="p-4 border border-yellow-300 dark:border-yellow-600 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 text-sm"
+            role="alert">
+            {{ ui.dashboard.error }}
+        </div>
+    </template>
+    <template x-if="!loading && !error && status">
+        <div class="p-4 border rounded-lg shadow-sm transition-all duration-300"
+            :class="status.cpu > 80 ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800' : 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800'">
+            <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide"
+                x-text="'{{ ui.dashboard.status }}'" id="dashboard-status-label"></h3>
+            <div class="mt-3 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="relative flex h-3 w-3" aria-hidden="true">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                            :class="status.cpu > 80 ? 'bg-red-400' : 'bg-green-400'"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3"
+                            :class="status.cpu > 80 ? 'bg-red-500' : 'bg-green-500'"></span>
+                    </span>
+                    <span class="text-2xl font-mono font-bold"
+                        :class="status.cpu > 80 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'"
+                        x-text="status.cpu > 80 ? '{{ ui.dashboard.critical }}' : '{{ ui.dashboard.operational }}'"
+                        role="status" aria-live="polite"></span>
+                </div>
+                <span
+                    class="text-xs text-gray-500 dark:text-gray-400 font-mono bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded"
+                    x-text="'{{ ui.dashboard.load }}: ' + status.cpu + '%'"
+                    :aria-label="'{{ ui.dashboard.load }} ' + status.cpu + ' {{ ui.dashboard.percent }}'"></span>
             </div>
-            <p class="text-xs mt-2 text-gray-400"
+            <div class="mt-3 w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2 overflow-hidden" role="progressbar"
+                :aria-valuenow="status.cpu" aria-valuemin="0" aria-valuemax="100"
+                :aria-label="'{{ ui.dashboard.load }}: ' + status.cpu + '%'">
+                <div class="h-2 rounded-full transition-all duration-500"
+                    :class="status.cpu > 80 ? 'bg-red-500' : status.cpu > 50 ? 'bg-yellow-500' : 'bg-green-500'"
+                    :style="'width: ' + status.cpu + '%'"></div>
+            </div>
+            <p class="text-xs mt-3 text-gray-400"
                 x-text="'{{ ui.dashboard.serverTime }}: ' + new Date(status.time).toLocaleTimeString()"></p>
         </div>
     </template>

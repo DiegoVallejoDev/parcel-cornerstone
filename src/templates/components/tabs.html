@@ -1,0 +1,30 @@
+<div x-data="{ 
+    activeTab: 'tab1',
+    tabs: [
+        { id: 'tab1', label: 'Overview', content: 'Here is the general overview of this template.' },
+        { id: 'tab2', label: 'Features', content: 'Including: PostHTML, Tailwind CSS, Alpine.js, Parcel.' },
+        { id: 'tab3', label: 'Setup', content: 'Run `pnpm install` then `pnpm start`.' }
+    ]
+}"
+    class="w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+    <div class="flex border-b border-gray-200 dark:border-gray-700">
+        <template x-for="tab in tabs" :key="tab.id">
+            <button @click="activeTab = tab.id"
+                class="flex-1 py-3 px-4 text-center text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-t-lg"
+                :class="activeTab === tab.id ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 font-bold' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'"
+                :aria-selected="activeTab === tab.id" role="tab">
+                <span x-text="tab.label"></span>
+            </button>
+        </template>
+    </div>
+
+    <div class="p-6">
+        <template x-for="tab in tabs" :key="tab.id">
+            <div x-show="activeTab === tab.id" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                role="tabpanel">
+                <p class="text-gray-700 dark:text-gray-300" x-text="tab.content"></p>
+            </div>
+        </template>
+    </div>
+</div>

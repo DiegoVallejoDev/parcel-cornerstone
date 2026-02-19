@@ -37,6 +37,10 @@
     {
       "source": "/api/:match*",
       "destination": "/api/:match*"
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/en/404.html"
     }
   ],
   "redirects": [

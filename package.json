@@ -5,18 +5,16 @@
   "author": "Diego Vallejo <DiegoVallejoDev>",
   "license": "MIT",
   "source": [
-    ".build/index.html",
-    ".build/*/index.html",
-    ".build/404.html",
-    ".build/*/404.html"
+    ".build/**/*.html",
+    ".build/sitemap.xml"
   ],
   "scripts": {
     "clean": "rimraf dist .parcel-cache .build",
     "setup:locales": "node scripts/setup-locales.js",
     "prestart": "pnpm run clean && pnpm run setup:locales",
-    "start": "parcel .build/index.html .build/*/index.html .build/404.html .build/*/404.html --open",
+    "start": "parcel \".build/**/*.html\" \".build/sitemap.xml\" --open",
     "prebuild": "pnpm run clean && pnpm run setup:locales",
-    "build": "parcel build .build/index.html .build/*/index.html .build/404.html .build/*/404.html --no-source-maps --detailed-report 10"
+    "build": "parcel build \".build/**/*.html\" \".build/sitemap.xml\" --no-source-maps --detailed-report 10"
   },
   "browserslist": [
     "> 0.5%",
@@ -30,7 +28,11 @@
     "@parcel/compressor-brotli": "^2.11.0",
     "@parcel/compressor-gzip": "^2.11.0",
     "@parcel/config-default": "^2.11.0",
+    "@parcel/packager-xml": "2.16.4",
+    "@parcel/transformer-xml": "2.16.4",
     "@tailwindcss/postcss": "^4.1.18",
+    "front-matter": "^4.0.2",
+    "marked": "^17.0.3",
     "parcel": "^2.11.0",
     "postcss": "^8.4.33",
     "posthtml": "^0.16.6",

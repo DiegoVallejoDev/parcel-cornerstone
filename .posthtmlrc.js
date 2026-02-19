@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// Helper to load all locales dynamically
 const localesDir = path.join(__dirname, 'src/locales');
 const locales = {};
 
@@ -17,11 +16,11 @@ module.exports = {
     "posthtml-include": { root: "./src" },
     "posthtml-expressions": {
       locals: (ctx) => {
-        // Detect language based on file path (e.g., src/en/index.html)
-        // Default to 'es' if not found in path
-        const isEnglish = ctx.file.includes('/en/'); 
-        const lang = isEnglish ? 'en' : 'es';
-        
+        // Detect language from entry path: .build/{lang}/index.html
+        const normalized = ctx.file.replace(/\\/g, '/');
+        const match = normalized.match(/\.build\/(\w+)\//);
+        const lang = match && locales[match[1]] ? match[1] : Object.keys(locales)[0];
+
         return {
           ui: locales[lang],
           lang: lang

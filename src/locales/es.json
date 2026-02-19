@@ -1,5 +1,30 @@
 {
   "title": "Parcel Cornerstone",
   "subtitle": "Arquitectura Estática Determinista",
-  "btn_load": "Cargar Estado del Servidor"
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "language": "Idioma"
+  },
+  "dashboard": {
+    "title": "Panel del Sistema en Vivo",
+    "loading": "Cargando...",
+    "status": "Estado del Sistema",
+    "load": "Carga",
+    "serverTime": "Hora del Servidor",
+    "operational": "OPERATIVO",
+    "critical": "CRÍTICO"
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "heading": "Página no encontrada",
+    "message": "La página que buscas no existe o ha sido movida.",
+    "backHome": "Volver al inicio"
+  },
+  "darkMode": {
+    "toggle": "Cambiar modo oscuro"
+  },
+  "footer": {
+    "copy": "Parcel Cornerstone. Todos los derechos reservados."
+  }
 }

@@ -1,24 +1,22 @@
 {
   "name": "parcel-cornerstone",
   "version": "1.0.0",
-  "description": "A deterministic, zero-runtime static site architecture.",
+  "description": "A hybrid static + serverless site template with build-time i18n.",
   "author": "Diego Vallejo <DiegoVallejoDev>",
   "license": "MIT",
   "source": [
-    "src/index.html",
-    "src/*/index.html"
+    ".build/index.html",
+    ".build/*/index.html",
+    ".build/404.html",
+    ".build/*/404.html"
   ],
   "scripts": {
-    "clean": "rimraf dist .parcel-cache",
+    "clean": "rimraf dist .parcel-cache .build",
     "setup:locales": "node scripts/setup-locales.js",
-    "prestart": "npm run clean && npm run setup:locales",
-    "start": "parcel src/index.html src/*/index.html --open",
-    "prebuild": "npm run clean && npm run setup:locales",
-    "build": "parcel build src/index.html src/*/index.html --no-source-maps --detailed-report 10"
-  },
-  "staticFiles": {
-    "staticPath": "src/static",
-    "staticOutDir": "api"
+    "prestart": "pnpm run clean && pnpm run setup:locales",
+    "start": "parcel .build/index.html .build/*/index.html .build/404.html .build/*/404.html --open",
+    "prebuild": "pnpm run clean && pnpm run setup:locales",
+    "build": "parcel build .build/index.html .build/*/index.html .build/404.html .build/*/404.html --no-source-maps --detailed-report 10"
   },
   "browserslist": [
     "> 0.5%",
@@ -26,18 +24,18 @@
     "not dead"
   ],
   "dependencies": {
-    "alpinejs": "^3.13.3",
-    "htmx.org": "^1.9.10"
+    "alpinejs": "^3.13.3"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0",
-    "autoprefixer": "^10.4.16",
+    "@parcel/compressor-brotli": "^2.11.0",
+    "@parcel/compressor-gzip": "^2.11.0",
+    "@parcel/config-default": "^2.11.0",
+    "@tailwindcss/postcss": "^4.1.18",
     "parcel": "^2.11.0",
-    "parcel-reporter-static-files-copy": "^1.5.3",
     "postcss": "^8.4.33",
     "posthtml": "^0.16.6",
     "posthtml-expressions": "^1.11.0",
-    "posthtml-include": "^1.7.4",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^4.1.18"
   }
 }

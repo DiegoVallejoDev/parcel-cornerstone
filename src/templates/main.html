@@ -1,35 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ lang }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ ui.title }}</title>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="module" src="../index.js"></script>
-</head>
-<body class="bg-gray-100 font-mono text-gray-900">
-    
-    <main class="max-w-2xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg">
-        <header class="border-b pb-4 mb-4">
-            <h1 class="text-3xl font-bold">{{ ui.title }}</h1>
-            <p class="text-gray-600">{{ ui.subtitle }}</p>
-        </header>
+<posthtml-include src="templates/components/navbar.html"></posthtml-include>
 
-        <section x-data="{ loaded: false }">
-            <button 
-                class="px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
-                hx-get="/api/stats.html"
-                hx-target="#server-stats"
-                hx-swap="innerHTML"
-                @htmx:after-request="loaded = true"
-            >
-                {{ ui.btn_load }}
-            </button>
+<main class="flex-1 max-w-2xl w-full mx-auto mt-10 p-6 space-y-6">
+    <header class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+        <h1 class="text-3xl font-bold">{{ ui.title }}</h1>
+        <p class="text-gray-600 dark:text-gray-400 mt-1">{{ ui.subtitle }}</p>
+    </header>
 
-            <div id="server-stats" class="mt-4 p-4 border border-dashed border-gray-300 rounded">
-                </div>
-        </section>
-    </main>
+    <section class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+        <h2 class="text-lg font-semibold mb-3">{{ ui.dashboard.title }}</h2>
+        <posthtml-include src="templates/components/dashboard.html"></posthtml-include>
+    </section>
+</main>
 
-</body>
-</html>
+<posthtml-include src="templates/components/footer.html"></posthtml-include>

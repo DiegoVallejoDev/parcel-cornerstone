@@ -1,15 +1,5 @@
 {
   "plugins": {
-    "autoprefixer": {},
-    "@fullhuman/postcss-purgecss": {
-      "content": [
-        "./src/**/*.html",
-        "./src/**/*.js"
-      ],
-      "safelist": [
-        "htmx-added",
-        "htmx-swapping"
-      ]
-    }
+    "@tailwindcss/postcss": {}
   }
 }

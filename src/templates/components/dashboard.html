@@ -1,0 +1,38 @@
+<div x-data="{
+    status: null,
+    loading: true,
+    async fetchStatus() {
+        try {
+            const res = await fetch('/api/status');
+            this.status = await res.json();
+        } catch (e) {
+            console.error('[Dashboard] Fetch failed', e);
+        } finally {
+            this.loading = false;
+        }
+    },
+    init() {
+        this.fetchStatus();
+        setInterval(() => this.fetchStatus(), 5000);
+    }
+}" class="rounded">
+    <template x-if="loading">
+        <div class="h-32 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded animate-pulse">
+            <span class="text-gray-400 text-sm">{{ ui.dashboard.loading }}</span>
+        </div>
+    </template>
+    <template x-if="!loading && status">
+        <div class="p-4 border rounded shadow-sm transition-colors duration-300"
+            :class="status.cpu > 80 ? 'bg-red-50 dark:bg-red-900/20' : 'bg-green-50 dark:bg-green-900/20'">
+            <h3 class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase"
+                x-text="'{{ ui.dashboard.status }}'"></h3>
+            <div class="mt-2 flex items-center justify-between">
+                <span class="text-2xl font-mono" :class="status.cpu > 80 ? 'text-red-600' : 'text-green-600'"
+                    x-text="status.cpu > 80 ? '{{ ui.dashboard.critical }}' : '{{ ui.dashboard.operational }}'"></span>
+                <span class="text-xs text-gray-400" x-text="'{{ ui.dashboard.load }}: ' + status.cpu + '%'"></span>
+            </div>
+            <p class="text-xs mt-2 text-gray-400"
+                x-text="'{{ ui.dashboard.serverTime }}: ' + new Date(status.time).toLocaleTimeString()"></p>
+        </div>
+    </template>
+</div>

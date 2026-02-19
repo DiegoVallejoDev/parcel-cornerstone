@@ -1,5 +1,30 @@
 {
   "title": "Parcel Cornerstone",
   "subtitle": "Deterministic Static Architecture",
-  "btn_load": "Load Server Status"
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "language": "Language"
+  },
+  "dashboard": {
+    "title": "Live System Dashboard",
+    "loading": "Loading...",
+    "status": "System Status",
+    "load": "Load",
+    "serverTime": "Server Time",
+    "operational": "OPERATIONAL",
+    "critical": "CRITICAL"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "heading": "Page not found",
+    "message": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "darkMode": {
+    "toggle": "Toggle dark mode"
+  },
+  "footer": {
+    "copy": "Parcel Cornerstone. All rights reserved."
+  }
 }

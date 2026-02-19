@@ -1,0 +1,51 @@
+<nav x-data="{ open: false }" class="bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="/" class="text-lg font-bold tracking-tight">{{ ui.title }}</a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+            <a href="/" class="hover:text-gray-300">{{ ui.nav.home }}</a>
+            <a href="#about" class="hover:text-gray-300">{{ ui.nav.about }}</a>
+            <div class="flex items-center gap-2 border-l border-gray-700 pl-4">
+                <each loop="item in languages">
+                    <a href="{{ item.href }}"
+                        class="px-2 py-1 rounded text-xs uppercase {{ item.active ? 'bg-white text-gray-900 font-bold' : 'hover:text-gray-300' }}">
+                        {{ item.code }}
+                    </a>
+                </each>
+            </div>
+            <button x-data
+                @click="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')"
+                class="p-1 hover:text-gray-300" :aria-label="'{{ ui.darkMode.toggle }}'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </button>
+        </div>
+        <button class="md:hidden p-1" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
+                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+    <div x-show="open" x-transition class="md:hidden px-4 pb-3 space-y-2 text-sm">
+        <a href="/" class="block hover:text-gray-300">{{ ui.nav.home }}</a>
+        <a href="#about" class="block hover:text-gray-300">{{ ui.nav.about }}</a>
+        <div class="flex items-center gap-2 border-t border-gray-700 pt-2">
+            <span class="text-xs text-gray-400">{{ ui.nav.language }}:</span>
+            <each loop="item in languages">
+                <a href="{{ item.href }}"
+                    class="px-2 py-1 rounded text-xs uppercase {{ item.active ? 'bg-white text-gray-900 font-bold' : 'hover:text-gray-300' }}">
+                    {{ item.code }}
+                </a>
+            </each>
+        </div>
+        <button x-data
+            @click="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')"
+            class="block w-full text-left hover:text-gray-300 border-t border-gray-700 pt-2">
+            {{ ui.darkMode.toggle }}
+        </button>
+    </div>
+</nav>

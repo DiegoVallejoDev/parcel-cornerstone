@@ -2,6 +2,8 @@
 
 A static-first site template using Parcel, PostHTML, Alpine.js, and Vercel.
 
+**[Live Demo](https://parcel-cornerstone.vercel.app)**
+
 Build-time localization and component composition produce static HTML served from a CDN. Alpine.js handles client-side interactivity when needed, and Vercel serverless functions provide JSON APIs.
 
 ## Overview
@@ -123,6 +125,11 @@ Dark mode uses Tailwind's class-based strategy with `dark:` variants. The prefer
 A localized 404 page is generated per language alongside the main `index.html`. The template at `src/templates/404.html` uses the same navbar and footer components.
 
 ## Usage
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [pnpm](https://pnpm.io/) — the `package.json` scripts are hardcoded to use `pnpm`
 
 ### Installation
 

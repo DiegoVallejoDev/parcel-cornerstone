@@ -23,7 +23,8 @@
     },
     "extensible": {
       "title": "Extensible",
-      "desc": "Add pages, components, and API routes with minimal config."
+      "desc": "Add pages, components, and API routes with minimal config.",
+      "button": "Try 404 Page"
     }
   },
   "dashboard": {

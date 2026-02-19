@@ -28,7 +28,7 @@
     }
   },
   "dashboard": {
-    "title": "Live System Dashboard",
+    "title": "System Status",
     "loading": "Loading...",
     "status": "System Status",
     "load": "Load",

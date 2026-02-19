@@ -29,7 +29,7 @@
                 </each>
             </div>
             <button x-on:click="$store.darkMode.toggle()"
-                class="p-1.5 rounded-full hover:bg-gray-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                class="p-1.5 rounded-full hover:bg-gray-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
                 :aria-label="$store.darkMode.on ? '{{ ui.darkMode.light }}' : '{{ ui.darkMode.dark }}'" role="switch"
                 :aria-checked="$store.darkMode.on">
                 <svg x-show="!$store.darkMode.on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"

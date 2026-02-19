@@ -20,6 +20,10 @@
     "themes": {
       "title": "Dark & Light",
       "desc": "Theme toggle with system preference detection."
+    },
+    "extensible": {
+      "title": "Extensible",
+      "desc": "Add pages, components, and API routes with minimal config."
     }
   },
   "dashboard": {

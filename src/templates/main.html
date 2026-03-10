@@ -1,4 +1,4 @@
-<posthtml-include src="templates/components/navbar.html"></posthtml-include>
+<include src="templates/components/navbar.html"></include>
 
 <main id="main-content" class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6" role="main">
     <header class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
@@ -12,20 +12,20 @@
     <section class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
         aria-labelledby="features-heading">
         <h2 id="features-heading" class="text-lg font-semibold mb-4">{{ ui.features.title }}</h2>
-        <posthtml-include src="templates/components/features.html"></posthtml-include>
+        <include src="templates/components/features.html"></include>
     </section>
 
     <section class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
         aria-labelledby="counter-heading">
         <h2 id="counter-heading" class="text-lg font-semibold mb-4">{{ ui.counter.title }}</h2>
-        <posthtml-include src="templates/components/counter.html"></posthtml-include>
+        <include src="templates/components/counter.html"></include>
     </section>
 
     <section id="about"
         class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
         aria-labelledby="about-heading">
         <h2 id="about-heading" class="text-lg font-semibold mb-4">{{ ui.about.title }}</h2>
-        <posthtml-include src="templates/components/about.html"></posthtml-include>
+        <include src="templates/components/about.html"></include>
     </section>
 
     <section class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
@@ -33,18 +33,18 @@
         <div class="space-y-8">
             <div>
                 <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Accordion</h3>
-                <posthtml-include src="templates/components/accordion.html"></posthtml-include>
+                <include src="templates/components/accordion.html"></include>
             </div>
 
             <div>
                 <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Tabs</h3>
-                <posthtml-include src="templates/components/tabs.html"></posthtml-include>
+                <include src="templates/components/tabs.html"></include>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 items-start">
                 <div>
                     <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Modal</h3>
-                    <posthtml-include src="templates/components/modal.html"></posthtml-include>
+                    <include src="templates/components/modal.html"></include>
                 </div>
 
                 <div>
@@ -69,5 +69,5 @@
     </section>
 </main>
 
-<posthtml-include src="templates/components/toast.html"></posthtml-include>
-<posthtml-include src="templates/components/footer.html"></posthtml-include>
+<include src="templates/components/toast.html"></include>
+<include src="templates/components/footer.html"></include>

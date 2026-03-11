@@ -50,17 +50,17 @@
                 <div>
                     <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Toasts</h3>
                     <div class="flex gap-2 flex-wrap">
-                        <button @click="$store.toasts.add('Operation successful!', 'success')"
+                        <button @click="$store.toasts.add('{{ ui.toasts.successMsg }}', 'success')"
                             class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                            Success
+                            {{ ui.toasts.success }}
                         </button>
-                        <button @click="$store.toasts.add('Just so you know...', 'info')"
+                        <button @click="$store.toasts.add('{{ ui.toasts.infoMsg }}', 'info')"
                             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                            Info
+                            {{ ui.toasts.info }}
                         </button>
-                        <button @click="$store.toasts.add('Something went wrong.', 'error')"
+                        <button @click="$store.toasts.add('{{ ui.toasts.errorMsg }}', 'error')"
                             class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                            Error
+                            {{ ui.toasts.error }}
                         </button>
                     </div>
                 </div>

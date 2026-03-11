@@ -2,10 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const frontMatter = require('front-matter');
 
+const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../cornerstone.config.json'), 'utf-8'));
 const localesDir = path.join(__dirname, '../src/locales');
 const contentDir = path.join(__dirname, '../src/content');
 const buildDir = path.join(__dirname, '../.build');
-const defaultLang = 'es';
+const defaultLang = config.defaultLang;
 
 if (!fs.existsSync(localesDir)) {
     console.error('Locales directory not found.');
@@ -120,7 +121,7 @@ Object.keys(locales).forEach(lang => {
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${generatedUrls.map(u => `  <url>
-    <loc>https://parcel-cornerstone.vercel.app${u.url}</loc>
+    <loc>${config.siteUrl}${u.url}</loc>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`).join('\n')}

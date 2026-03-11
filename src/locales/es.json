@@ -27,17 +27,6 @@
       "button": "Probar página 404"
     }
   },
-  "dashboard": {
-    "title": "Panel del Sistema en Vivo",
-    "loading": "Cargando...",
-    "status": "Estado del Sistema",
-    "load": "Carga",
-    "serverTime": "Hora del Servidor",
-    "operational": "OPERATIVO",
-    "critical": "CRÍTICO",
-    "error": "No se pudo conectar al servidor. Reintentando...",
-    "percent": "por ciento"
-  },
   "counter": {
     "title": "Contador Interactivo",
     "description": "Un contador reactivo simple con Alpine.js.",
@@ -70,5 +59,13 @@
   },
   "footer": {
     "copy": "Parcel Cornerstone. Todos los derechos reservados."
+  },
+  "toasts": {
+    "success": "Éxito",
+    "info": "Info",
+    "error": "Error",
+    "successMsg": "¡Operación exitosa!",
+    "infoMsg": "Para tu información...",
+    "errorMsg": "Algo salió mal."
   }
 }

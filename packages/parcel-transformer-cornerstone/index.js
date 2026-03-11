@@ -7,7 +7,6 @@ const { marked } = require('marked');
 const frontMatter = require('front-matter');
 
 const INCLUDE_RE = /<include\s+src="([^"]+)"\s*(?:\/>|><\/include>)/g;
-const DEFAULT_LANG = 'es';
 
 module.exports = new Transformer({
     async transform({ asset, options }) {
@@ -20,6 +19,11 @@ module.exports = new Transformer({
         }
 
         const projectRoot = options.projectRoot.replace(/\\/g, '/');
+        const configPath = path.join(projectRoot, 'cornerstone.config.json');
+        asset.invalidateOnFileChange(configPath);
+        const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+        const DEFAULT_LANG = config.defaultLang;
+
         const srcDir = path.join(projectRoot, 'src').replace(/\\/g, '/');
         const localesDir = path.join(srcDir, 'locales').replace(/\\/g, '/');
         const contentDir = path.join(srcDir, 'content').replace(/\\/g, '/');
@@ -102,8 +106,11 @@ module.exports = new Transformer({
             return `{{${open} ${expr.trim()} ${close}}}`;
         });
 
+        // Strip data-content attribute from output
+        processed = processed.replace(/\s*data-content="[^"]*"/g, '');
+
         // --- Run posthtml-expressions ---
-        const locals = { ui, lang, languages };
+        const locals = { ui, lang, languages, year: new Date().getFullYear() };
         if (post) {
             locals.post = post;
         }

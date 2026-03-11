@@ -27,17 +27,6 @@
       "button": "Try 404 Page"
     }
   },
-  "dashboard": {
-    "title": "System Status",
-    "loading": "Loading...",
-    "status": "System Status",
-    "load": "Load",
-    "serverTime": "Server Time",
-    "operational": "OPERATIONAL",
-    "critical": "CRITICAL",
-    "error": "Unable to reach the server. Retrying...",
-    "percent": "percent"
-  },
   "counter": {
     "title": "Interactive Counter",
     "description": "A simple Alpine.js reactive counter.",
@@ -70,5 +59,13 @@
   },
   "footer": {
     "copy": "Parcel Cornerstone. All rights reserved."
+  },
+  "toasts": {
+    "success": "Success",
+    "info": "Info",
+    "error": "Error",
+    "successMsg": "Operation successful!",
+    "infoMsg": "Just so you know...",
+    "errorMsg": "Something went wrong."
   }
 }

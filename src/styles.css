@@ -2,6 +2,10 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+.card {
+    @apply bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700;
+}
+
 @layer base {
     *:focus-visible {
         outline: 2px solid currentColor;

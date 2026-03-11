@@ -9,23 +9,29 @@
   },
   "features": {
     "title": "Features",
-    "fast": {
-      "title": "Lightning Fast",
-      "desc": "Zero-config Parcel bundler with HMR and optimized builds."
-    },
-    "i18n": {
-      "title": "Multi-language",
-      "desc": "Build-time i18n with static HTML per locale."
-    },
-    "themes": {
-      "title": "Dark & Light",
-      "desc": "Theme toggle with system preference detection."
-    },
-    "extensible": {
-      "title": "Extensible",
-      "desc": "Add pages, components, and API routes with minimal config.",
-      "button": "Try 404 Page"
-    }
+    "items": [
+      {
+        "icon": "\u26a1",
+        "title": "Lightning Fast",
+        "desc": "Zero-config Parcel bundler with HMR and optimized builds."
+      },
+      {
+        "icon": "\ud83c\udf10",
+        "title": "Multi-language",
+        "desc": "Build-time i18n with static HTML per locale."
+      },
+      {
+        "icon": "\ud83c\udfa8",
+        "title": "Dark & Light",
+        "desc": "Theme toggle with system preference detection."
+      },
+      {
+        "icon": "\ud83d\ude80",
+        "title": "Extensible",
+        "desc": "Add pages, components, and API routes with minimal config.",
+        "button": "Try 404 Page"
+      }
+    ]
   },
   "counter": {
     "title": "Interactive Counter",
@@ -38,12 +44,12 @@
   "about": {
     "title": "About This Project",
     "p1": "Parcel Cornerstone is a lightweight template for building static sites with serverless API routes, build-time internationalization, and reactive UI components.",
-    "stack": {
-      "parcel": "Parcel v2 — zero-config bundler with HMR",
-      "tailwind": "Tailwind CSS v4 — utility-first styling",
-      "alpine": "Alpine.js v3 — lightweight reactivity",
-      "posthtml": "PostHTML Expressions — build-time templating & i18n"
-    },
+    "stack": [
+      "Parcel v2 — zero-config bundler with HMR",
+      "Tailwind CSS v4 — utility-first styling",
+      "Alpine.js v3 — lightweight reactivity",
+      "PostHTML Expressions — build-time templating & i18n"
+    ],
     "p2": "Deploy anywhere: Vercel, Netlify, or any static host."
   },
   "notFound": {

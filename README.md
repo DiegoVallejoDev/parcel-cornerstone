@@ -44,9 +44,8 @@ parcel-cornerstone/
 │   │       └── hello-world.md
 │   ├── locales/              # JSON locale files (en.json, es.json, ...)
 │   ├── stores/               # Alpine.js global stores
-│   │   ├── app.js            # Theme + language state
-│   │   ├── toasts.js         # Toast notification store
-│   │   └── index.js          # Store barrel export
+│   │   ├── app.js            # Theme state + toggle
+│   │   └── toasts.js         # Toast notification store
 │   ├── templates/
 │   │   ├── components/       # Reusable HTML partials (build-time includes)
 │   │   │   ├── about.html
@@ -61,8 +60,8 @@ parcel-cornerstone/
 │   │   ├── main.html         # Main page body layout
 │   │   ├── post.html         # Blog post page layout
 │   │   └── 404.html          # Not-found page layout
-│   ├── index.js              # Alpine.js bootstrap + store registration
-│   └── styles.css            # Tailwind directives + dark mode config
+│   ├── index.js              # Alpine.js bootstrap, stores + data components
+│   └── styles.css            # Tailwind + .card utility + dark mode config
 ├── cornerstone.config.json   # Default language + site URL
 ├── vercel.json               # Routing, headers, CSP
 ├── .parcelrc                 # Parcel pipeline (custom transformer + compressors)
@@ -155,14 +154,28 @@ resolved recursively by the custom Parcel transformer at build time.
 ```
 
 Expressions like `{{ ui.features.title }}` and loops like
-`<each loop="lang in languages">` are evaluated at build time via
-`posthtml-expressions`.
+`<each loop="feature in ui.features.items">` are evaluated at build time via
+`posthtml-expressions`. Conditionals use `<if condition="...">` tags.
 
 ### Alpine.js
 
 Alpine.js provides client-side reactivity for interactive components (accordion,
 counter, modal, tabs, toast notifications, dark mode toggle). Global state is
-managed via Alpine stores in `src/stores/`.
+managed via Alpine stores in `src/stores/`. Reusable component state (counter,
+modal, toasts) is registered via `Alpine.data()` in `src/index.js`, keeping
+templates clean:
+
+```html
+<!-- Template just references the registered name -->
+<div x-data="counter">...</div>
+<div x-data="modal">...</div>
+```
+
+```javascript
+// src/index.js
+Alpine.data('counter', () => ({ count: 0 }));
+Alpine.data('modal', () => ({ open: false }));
+```
 
 > **Note:** Alpine.js v3 standard build requires `'unsafe-eval'` in the CSP
 > `script-src` directive. This is because Alpine evaluates directive expressions

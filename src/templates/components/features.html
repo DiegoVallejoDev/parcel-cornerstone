@@ -1,47 +1,19 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">
-    <article
-        class="group p-5 rounded-xl text-center border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border-gray-200 dark:border-gray-600"
-        role="listitem">
-        <div class="text-3xl mb-2" aria-hidden="true">&#9889;</div>
-        <h3 class="text-sm font-semibold">{{ ui.features.fast.title }}</h3>
-        <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-            {{ ui.features.fast.desc }}
-        </p>
-    </article>
-    <article
-        class="group p-5 rounded-xl text-center border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border-gray-200 dark:border-gray-600"
-        role="listitem">
-        <div class="text-3xl mb-2" aria-hidden="true">&#127760;</div>
-        <h3 class="text-sm font-semibold">{{ ui.features.i18n.title }}</h3>
-        <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-            {{ ui.features.i18n.desc }}
-        </p>
-    </article>
-    <article
-        class="group p-5 rounded-xl text-center border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border-gray-200 dark:border-gray-600"
-        role="listitem">
-        <div class="text-3xl mb-2" aria-hidden="true">&#127912;</div>
-        <h3 class="text-sm font-semibold">{{ ui.features.themes.title }}</h3>
-        <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-            {{ ui.features.themes.desc }}
-        </p>
-    </article>
-
-    <article
-        class="group p-5 rounded-xl text-center border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border-gray-200 dark:border-gray-600"
-        role="listitem">
-        <div class="text-3xl mb-2" aria-hidden="true">&#128640;</div>
-        <h3 class="text-sm font-semibold">{{ ui.features.extensible.title }}</h3>
-        <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-            {{ ui.features.extensible.desc }}
-        </p>
-
-        <!-- example go to 404 page  -->
-        <div class="mt-4">
-            <a href="/non-existent-page"
-                class="inline-block px-4 py-2 text-xs font-medium rounded bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
-                {{ ui.features.extensible.button }}
-            </a>
-        </div>
-    </article>
+    <each loop="feature in ui.features.items">
+        <article
+            class="group p-5 rounded-xl text-center border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 border-gray-200 dark:border-gray-600"
+            role="listitem">
+            <div class="text-3xl mb-2" aria-hidden="true">{{ feature.icon }}</div>
+            <h3 class="text-sm font-semibold">{{ feature.title }}</h3>
+            <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">{{ feature.desc }}</p>
+            <if condition="feature.button">
+                <div class="mt-4">
+                    <a href="/non-existent-page"
+                        class="inline-block px-4 py-2 text-xs font-medium rounded bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                        {{ feature.button }}
+                    </a>
+                </div>
+            </if>
+        </article>
+    </each>
 </div>

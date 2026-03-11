@@ -9,23 +9,29 @@
   },
   "features": {
     "title": "Características",
-    "fast": {
-      "title": "Ultra Rápido",
-      "desc": "Bundler Parcel sin configuración con HMR y builds optimizados."
-    },
-    "i18n": {
-      "title": "Multi-idioma",
-      "desc": "i18n en tiempo de build con HTML estático por idioma."
-    },
-    "themes": {
-      "title": "Oscuro y Claro",
-      "desc": "Cambio de tema con detección de preferencia del sistema."
-    },
-    "extensible": {
-      "title": "Extensible",
-      "desc": "Añade páginas, componentes y rutas API con mínima configuración.",
-      "button": "Probar página 404"
-    }
+    "items": [
+      {
+        "icon": "\u26a1",
+        "title": "Ultra Rápido",
+        "desc": "Bundler Parcel sin configuración con HMR y builds optimizados."
+      },
+      {
+        "icon": "\ud83c\udf10",
+        "title": "Multi-idioma",
+        "desc": "i18n en tiempo de build con HTML estático por idioma."
+      },
+      {
+        "icon": "\ud83c\udfa8",
+        "title": "Oscuro y Claro",
+        "desc": "Cambio de tema con detección de preferencia del sistema."
+      },
+      {
+        "icon": "\ud83d\ude80",
+        "title": "Extensible",
+        "desc": "Añade páginas, componentes y rutas API con mínima configuración.",
+        "button": "Probar página 404"
+      }
+    ]
   },
   "counter": {
     "title": "Contador Interactivo",
@@ -38,12 +44,12 @@
   "about": {
     "title": "Acerca del Proyecto",
     "p1": "Parcel Cornerstone es una plantilla ligera para crear sitios estáticos con rutas API serverless, internacionalización en tiempo de build y componentes de UI reactivos.",
-    "stack": {
-      "parcel": "Parcel v2 — bundler sin configuración con HMR",
-      "tailwind": "Tailwind CSS v4 — estilos utility-first",
-      "alpine": "Alpine.js v3 — reactividad ligera",
-      "posthtml": "PostHTML Expressions — plantillas & i18n en tiempo de build"
-    },
+    "stack": [
+      "Parcel v2 — bundler sin configuración con HMR",
+      "Tailwind CSS v4 — estilos utility-first",
+      "Alpine.js v3 — reactividad ligera",
+      "PostHTML Expressions — plantillas & i18n en tiempo de build"
+    ],
     "p2": "Despliega en cualquier lugar: Vercel, Netlify o cualquier host estático."
   },
   "notFound": {

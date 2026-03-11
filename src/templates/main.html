@@ -1,7 +1,7 @@
 <include src="templates/components/navbar.html"></include>
 
 <main id="main-content" class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6" role="main">
-    <header class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
+    <header class="card p-8">
         <h1
             class="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
             {{ ui.title }}
@@ -9,26 +9,22 @@
         <p class="text-gray-500 dark:text-gray-400 mt-2">{{ ui.subtitle }}</p>
     </header>
 
-    <section class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
-        aria-labelledby="features-heading">
+    <section class="card" aria-labelledby="features-heading">
         <h2 id="features-heading" class="text-lg font-semibold mb-4">{{ ui.features.title }}</h2>
         <include src="templates/components/features.html"></include>
     </section>
 
-    <section class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
-        aria-labelledby="counter-heading">
+    <section class="card" aria-labelledby="counter-heading">
         <h2 id="counter-heading" class="text-lg font-semibold mb-4">{{ ui.counter.title }}</h2>
         <include src="templates/components/counter.html"></include>
     </section>
 
-    <section id="about"
-        class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700"
-        aria-labelledby="about-heading">
+    <section id="about" class="card" aria-labelledby="about-heading">
         <h2 id="about-heading" class="text-lg font-semibold mb-4">{{ ui.about.title }}</h2>
         <include src="templates/components/about.html"></include>
     </section>
 
-    <section class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+    <section class="card">
         <h2 class="text-lg font-semibold mb-4">UI Components Demo</h2>
         <div class="space-y-8">
             <div>

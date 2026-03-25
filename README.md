@@ -73,59 +73,17 @@ parcel-cornerstone/
 
 The build runs in two stages:
 
-### Stage 1 — Stub Generation (`setup-locales.js`)
+1. **Stub Generation** — `scripts/setup-locales.js` produces thin HTML entry
+   points in `.build/` (one per locale × page) plus a `sitemap.xml`.
+2. **Parcel Transform** — the custom `parcel-transformer-cornerstone` plugin
+   resolves `<include>` tags, injects locale data, renders Markdown, and
+   evaluates `posthtml-expressions` — producing fully resolved HTML in `dist/`.
 
-`scripts/setup-locales.js` produces thin HTML entry points in `.build/`. Each
-stub is a minimal `<!DOCTYPE html>` shell containing:
+Every source file touched is registered with Parcel's invalidation system,
+enabling automatic rebuilds and HMR during development.
 
-- An `<include src="templates/main.html">` tag (or `404.html`, `post.html`)
-- `<link rel="alternate" hreflang>` tags for SEO
-- A `<script>` tag pointing to `src/index.js`
-- A `data-content` attribute on blog post includes (path to the `.md` file)
-- Language-specific paths: default language → root, others → `/{lang}/`
-
-The stubs contain **no resolved content** — all include resolution and
-expression evaluation happen in the next stage.
-
-A `sitemap.xml` is also generated with entries for all pages and languages.
-
-### Stage 2 — Parcel Transform (`parcel-transformer-cornerstone`)
-
-When Parcel processes each `.html` stub, the custom transformer:
-
-1. **Resolves `<include>` tags** recursively — replaces each
-   `<include src="...">` with the file's content, and registers
-   `invalidateOnFileChange` so Parcel watches every included file for HMR.
-2. **Loads locale data** — reads the matching `src/locales/{lang}.json` and
-   injects it as `{{ ui.* }}` template locals.
-3. **Processes Markdown** — if a `data-content="..."` attribute is present,
-   reads the `.md` file, parses front-matter, renders Markdown to HTML via
-   `marked`, and injects `{{ post.title }}`, `{{ post.body }}`, etc. The
-   `data-content` attribute is stripped from the output.
-4. **Evaluates expressions** — runs `posthtml-expressions` with all locals
-   (`ui`, `lang`, `languages`, `year`, and optionally `post`).
-5. **Tracks dependencies** — every source file (locale JSON, template, content)
-   is registered with Parcel's invalidation system, so changes trigger rebuilds
-   automatically.
-
-### Data Flow
-
-```text
-cornerstone.config.json ──┐
-src/locales/*.json ────────┤
-src/templates/**/*.html ───┤    Parcel
-src/content/blog/*.md ─────┤    Transformer    Parcel
-                           ▼    (Stage 2)      Default
-setup-locales.js ──► .build/ ──────────────► dist/
-  (Stage 1)         (stubs)   resolve includes   (final)
-                              inject i18n
-                              render markdown
-                              evaluate {{ }}
-
-Browser ──► CDN ──► dist/*.html
-                    └── Alpine.js + stores for interactivity
-                    └── fetch() ──► /api/* ──► JSON
-```
+For detailed diagrams and deeper explanations, see
+**[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
 ## How it Works
 

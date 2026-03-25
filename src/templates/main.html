@@ -1,9 +1,8 @@
 <include src="templates/components/navbar.html"></include>
 
-<main id="main-content" class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6" role="main">
-    <header class="card p-8">
-        <h1
-            class="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+<main id="main-content" class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6 stagger" role="main">
+    <header class="card p-8 animate-fade-in-up">
+        <h1 class="text-3xl heading-gradient">
             {{ ui.title }}
         </h1>
         <p class="text-gray-500 dark:text-gray-400 mt-2">{{ ui.subtitle }}</p>
@@ -28,34 +27,33 @@
         <h2 class="text-lg font-semibold mb-4">UI Components Demo</h2>
         <div class="space-y-8">
             <div>
-                <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Accordion</h3>
+                <h3 class="section-label mb-3">Accordion</h3>
                 <include src="templates/components/accordion.html"></include>
             </div>
 
             <div>
-                <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Tabs</h3>
+                <h3 class="section-label mb-3">Tabs</h3>
                 <include src="templates/components/tabs.html"></include>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 items-start">
                 <div>
-                    <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Modal</h3>
+                    <h3 class="section-label mb-3">Modal</h3>
                     <include src="templates/components/modal.html"></include>
                 </div>
 
-                <div>
-                    <h3 class="font-bold text-gray-500 uppercase text-xs mb-3 tracking-wider">Toasts</h3>
+                <div x-data>
+                    <h3 class="section-label mb-3">Toasts</h3>
                     <div class="flex gap-2 flex-wrap">
                         <button @click="$store.toasts.add('{{ ui.toasts.successMsg }}', 'success')"
-                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
+                            class="btn-accent bg-green-600 hover:bg-green-700">
                             {{ ui.toasts.success }}
                         </button>
-                        <button @click="$store.toasts.add('{{ ui.toasts.infoMsg }}', 'info')"
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
+                        <button @click="$store.toasts.add('{{ ui.toasts.infoMsg }}', 'info')" class="btn-accent">
                             {{ ui.toasts.info }}
                         </button>
                         <button @click="$store.toasts.add('{{ ui.toasts.errorMsg }}', 'error')"
-                            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm transition-colors">
+                            class="btn-accent bg-red-600 hover:bg-red-700">
                             {{ ui.toasts.error }}
                         </button>
                     </div>

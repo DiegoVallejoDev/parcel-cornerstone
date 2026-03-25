@@ -6,16 +6,13 @@
             role="status" aria-live="polite" :aria-label="'{{ ui.counter.title }}: ' + count"></p>
     </div>
     <div class="flex gap-2" role="group" aria-label="{{ ui.counter.controls }}">
-        <button x-on:click="count--" aria-label="{{ ui.counter.decrement }}"
-            class="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 font-bold text-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 active:scale-95">
+        <button x-on:click="count--" aria-label="{{ ui.counter.decrement }}" class="btn-secondary font-bold text-lg">
             &minus;
         </button>
-        <button x-on:click="count++" aria-label="{{ ui.counter.increment }}"
-            class="px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg hover:opacity-80 font-bold text-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2 active:scale-95">
+        <button x-on:click="count++" aria-label="{{ ui.counter.increment }}" class="btn-primary font-bold text-lg">
             &plus;
         </button>
-        <button x-on:click="count = 0" aria-label="{{ ui.counter.reset }}"
-            class="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 active:scale-95">
+        <button x-on:click="count = 0" aria-label="{{ ui.counter.reset }}" class="btn-ghost text-xs">
             {{ ui.counter.reset }}
         </button>
     </div>

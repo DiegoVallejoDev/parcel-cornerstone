@@ -1,20 +1,27 @@
-<article class="max-w-3xl mx-auto px-4 py-8">
+<include src="templates/components/navbar.html"></include>
+
+<article class="max-w-3xl mx-auto px-4 py-8 animate-fade-in-up">
     <header class="mb-8">
-        <a href="/" class="text-blue-600 dark:text-blue-400 hover:underline mb-4 inline-block">&larr; Back to Home</a>
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">{{ post.title }}</h1>
-        <div class="text-gray-500 dark:text-gray-400 text-sm">
-            <span>{{ post.date }}</span> • <span>{{ post.author }}</span>
+        <a href="/" class="btn-ghost text-sm mb-4 inline-flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Home
+        </a>
+        <h1 class="text-4xl heading-gradient mb-2">{{ post.title }}</h1>
+        <div class="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2">
+            <span>{{ post.date }}</span>
+            <span class="text-gray-300 dark:text-gray-600">&bull;</span>
+            <span>{{ post.author }}</span>
         </div>
-        <div class="mt-4 flex gap-2">
+        <div class="mt-4 flex gap-2 flex-wrap">
             <each loop="tag in post.tags">
-                <span
-                    class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300">#{{
-                    tag }}</span>
+                <span class="tag">#{{ tag }}</span>
             </each>
         </div>
     </header>
 
-    <div class="prose prose-lg dark:prose-invert max-w-none">
+    <div class="prose max-w-none">
         {{{ post.content }}}
     </div>
 </article>

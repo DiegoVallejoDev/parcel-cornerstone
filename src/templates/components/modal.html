@@ -1,6 +1,5 @@
 <div x-data="modal">
-    <button @click="open = true"
-        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition-colors focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+    <button @click="open = true" class="btn-accent shadow">
         Open Demo Modal
     </button>
 
@@ -51,13 +50,11 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="button" @click="open = false"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                        <button type="button" @click="open = false" class="btn-accent sm:w-auto w-full">
                             Deactivate
                         </button>
-                        <button type="button" @click="open = false"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="button" @click="open = false" class="btn-secondary sm:w-auto w-full mt-3 sm:mt-0">
                             Cancel
                         </button>
                     </div>

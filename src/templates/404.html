@@ -1,11 +1,11 @@
 <include src="templates/components/navbar.html"></include>
 
-<main class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 flex flex-col items-center justify-center text-center space-y-4">
-    <h1 class="text-6xl font-bold text-gray-300 dark:text-gray-600">404</h1>
+<main
+    class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 flex flex-col items-center justify-center text-center space-y-4 animate-fade-in-up">
+    <h1 class="text-8xl font-black heading-gradient">404</h1>
     <h2 class="text-2xl font-semibold">{{ ui.notFound.heading }}</h2>
-    <p class="text-gray-600 dark:text-gray-400">{{ ui.notFound.message }}</p>
-    <a href="/"
-        class="mt-4 inline-block px-6 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded hover:opacity-80 transition-opacity text-sm font-medium">
+    <p class="text-gray-600 dark:text-gray-400 max-w-md">{{ ui.notFound.message }}</p>
+    <a href="/" class="btn-primary mt-4">
         {{ ui.notFound.backHome }}
     </a>
 </main>

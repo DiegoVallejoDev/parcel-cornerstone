@@ -48,12 +48,22 @@ module.exports = new Transformer({
 
         const ui = JSON.parse(fs.readFileSync(path.join(localesDir, `${lang}.json`), 'utf-8'));
 
-        // --- Locale key validation ---
+        // --- Locale key validation (deep) ---
         if (lang !== DEFAULT_LANG) {
             const baseUI = JSON.parse(fs.readFileSync(path.join(localesDir, `${DEFAULT_LANG}.json`), 'utf-8'));
-            const baseKeys = Object.keys(baseUI).sort();
-            const langKeys = Object.keys(ui).sort();
-            const missing = baseKeys.filter(k => !langKeys.includes(k));
+            const missing = [];
+            (function findMissing(base, target, prefix) {
+                for (const key of Object.keys(base)) {
+                    const path = prefix ? `${prefix}.${key}` : key;
+                    if (!(key in target)) {
+                        missing.push(path);
+                    } else if (typeof base[key] === 'object' && base[key] !== null && !Array.isArray(base[key])) {
+                        if (typeof target[key] === 'object' && target[key] !== null && !Array.isArray(target[key])) {
+                            findMissing(base[key], target[key], path);
+                        }
+                    }
+                }
+            })(baseUI, ui, '');
             if (missing.length > 0) {
                 console.warn(`[parcel-transformer-cornerstone] ${lang} is missing keys: ${missing.join(', ')}`);
             }
@@ -82,19 +92,57 @@ module.exports = new Transformer({
             }
         }
 
+        // --- Blog index: collect all posts for listing pages ---
+        let posts = null;
+        const isBlogIndex = filePath.includes('/blog/index.html');
+        if (isBlogIndex) {
+            posts = [];
+            const scanDir = path.join(contentDir);
+            if (fs.existsSync(scanDir)) {
+                const walk = (dir, relativePath) => {
+                    for (const file of fs.readdirSync(dir)) {
+                        const abs = path.join(dir, file);
+                        if (fs.statSync(abs).isDirectory()) {
+                            walk(abs, relativePath ? `${relativePath}/${file}` : file);
+                        } else if (file.endsWith('.md')) {
+                            asset.invalidateOnFileChange(abs);
+                            const raw = fs.readFileSync(abs, 'utf-8');
+                            const { attributes } = frontMatter(raw);
+                            const slug = path.parse(file).name;
+                            const rel = relativePath ? `${relativePath}/${slug}` : slug;
+                            const langPrefix = lang === DEFAULT_LANG ? '' : `/${lang}`;
+                            posts.push({
+                                ...attributes,
+                                slug,
+                                url: `${langPrefix}/${rel}/`,
+                            });
+                        }
+                    }
+                };
+                walk(scanDir, '');
+                posts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+            }
+        }
+
         // Invalidate when new .md files are created
         asset.invalidateOnFileCreate({ glob: path.join(contentDir, '**/*.md').replace(/\\/g, '/') });
 
-        // --- Resolve <include> tags recursively ---
-        function resolveIncludes(html) {
+        // --- Resolve <include> tags recursively (with cycle detection) ---
+        function resolveIncludes(html, ancestors = new Set()) {
             return html.replace(INCLUDE_RE, (_, src) => {
                 const absInclude = path.join(srcDir, src);
+                if (ancestors.has(absInclude)) {
+                    console.error(`[parcel-transformer-cornerstone] Circular include detected: ${absInclude}`);
+                    return '';
+                }
                 if (!fs.existsSync(absInclude)) {
                     console.warn(`[parcel-transformer-cornerstone] Include not found: ${absInclude}`);
                     return '';
                 }
                 asset.invalidateOnFileChange(absInclude);
-                return resolveIncludes(fs.readFileSync(absInclude, 'utf-8'));
+                const next = new Set(ancestors);
+                next.add(absInclude);
+                return resolveIncludes(fs.readFileSync(absInclude, 'utf-8'), next);
             });
         }
 
@@ -113,6 +161,9 @@ module.exports = new Transformer({
         const locals = { ui, lang, languages, year: new Date().getFullYear() };
         if (post) {
             locals.post = post;
+        }
+        if (posts) {
+            locals.posts = posts;
         }
 
         const result = await posthtml([

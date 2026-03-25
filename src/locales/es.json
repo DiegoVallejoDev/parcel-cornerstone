@@ -66,6 +66,10 @@
   "footer": {
     "copy": "Parcel Cornerstone. Todos los derechos reservados."
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Últimas publicaciones y artículos."
+  },
   "toasts": {
     "success": "Éxito",
     "info": "Info",

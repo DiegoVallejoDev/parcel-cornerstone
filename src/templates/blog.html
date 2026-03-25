@@ -1,0 +1,35 @@
+<include src="templates/components/navbar.html"></include>
+
+<main id="main-content" class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6" role="main">
+    <header class="card p-8">
+        <h1
+            class="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+            {{ ui.blog.title }}
+        </h1>
+        <p class="text-gray-500 dark:text-gray-400 mt-2">{{ ui.blog.subtitle }}</p>
+    </header>
+
+    <each loop="post in posts">
+        <article class="card p-6 hover:shadow-xl transition-shadow">
+            <a href="{{ post.url }}" class="block group">
+                <h2
+                    class="text-xl font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {{ post.title }}
+                </h2>
+                <if condition="post.description">
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">{{ post.description }}</p>
+                </if>
+                <div class="flex items-center gap-4 mt-3 text-sm text-gray-400 dark:text-gray-500">
+                    <if condition="post.date">
+                        <time>{{ post.date }}</time>
+                    </if>
+                    <if condition="post.author">
+                        <span>{{ post.author }}</span>
+                    </if>
+                </div>
+            </a>
+        </article>
+    </each>
+</main>
+
+<include src="templates/components/footer.html"></include>

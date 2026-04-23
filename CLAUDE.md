@@ -13,9 +13,9 @@ v4, and Vercel serverless functions, with build-time i18n.
 
 - **Use `pnpm`** — never `npm` or `yarn` (enforced by `packageManager` in
   `package.json`).
-- **`src/**`and`scripts/**` are ESM**;
-  **`api/**`is CommonJS** (Vercel serverless convention —`module.exports =
-  function handler(req, res) { … }`).
+- Module format by directory: `src/**` and `scripts/**` are **ESM**; `api/**` is
+  **CommonJS** (Vercel serverless convention —
+  `module.exports = function handler(req, res) { … }`).
 - **Alpine.js v3 standard build requires `'unsafe-eval'` in CSP** — do not "fix"
   this without a planned refactor of all inline `x-data` / `@click` / `:class`
   expressions.

@@ -24,7 +24,12 @@ export default [
         },
     },
     {
-        files: ['api/**/*.js', 'scripts/**/*.js', 'packages/**/*.js', '.htmlnanorc.js'],
+        files: [
+            'api/**/*.js',
+            'scripts/**/*.js',
+            'packages/**/*.js',
+            '.htmlnanorc.js',
+        ],
         languageOptions: {
             sourceType: 'commonjs',
             globals: {
@@ -40,6 +45,11 @@ export default [
         },
     },
     {
-        ignores: ['dist/**', '.build/**', '.parcel-cache/**', 'node_modules/**'],
+        ignores: [
+            'dist/**',
+            '.build/**',
+            '.parcel-cache/**',
+            'node_modules/**',
+        ],
     },
 ];

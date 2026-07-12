@@ -2,6 +2,7 @@
   "name": "parcel-transformer-cornerstone",
   "version": "1.0.0",
   "description": "Custom Parcel transformer for i18n template resolution with HMR support.",
+  "private": true,
   "main": "index.js",
   "engines": {
     "parcel": "^2.0.0"

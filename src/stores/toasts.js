@@ -8,6 +8,6 @@ export default {
     },
 
     remove(id) {
-        this.items = this.items.filter(item => item.id !== id);
-    }
-}
+        this.items = this.items.filter((item) => item.id !== id);
+    },
+};

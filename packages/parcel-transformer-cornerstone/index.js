@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const posthtml = require('posthtml');
 const expressions = require('posthtml-expressions');
-const { marked } = require('marked');
 const frontMatter = require('front-matter');
 
 const INCLUDE_RE = /<include\s+src="([^"]+)"\s*(?:\/>|><\/include>)/g;
@@ -29,16 +28,20 @@ module.exports = new Transformer({
         const contentDir = path.join(srcDir, 'content').replace(/\\/g, '/');
 
         // --- Detect locale from path ---
-        // .build/{lang}/... → lang; .build/index.html → defaultLang
+        // .build/{lang}/... -> lang; .build/index.html -> defaultLang
         const buildDir = path.join(projectRoot, '.build').replace(/\\/g, '/');
         const relFromBuild = filePath.replace(buildDir + '/', '');
         const firstSegment = relFromBuild.split('/')[0];
 
         // Load all locale files to know which codes exist
-        const localeFiles = fs.readdirSync(localesDir).filter(f => f.endsWith('.json'));
-        const allLangCodes = localeFiles.map(f => path.parse(f).name);
+        const localeFiles = fs
+            .readdirSync(localesDir)
+            .filter((f) => f.endsWith('.json'));
+        const allLangCodes = localeFiles.map((f) => path.parse(f).name);
 
-        const lang = allLangCodes.includes(firstSegment) ? firstSegment : DEFAULT_LANG;
+        const lang = allLangCodes.includes(firstSegment)
+            ? firstSegment
+            : DEFAULT_LANG;
 
         // Invalidate on ALL locale files so any locale change triggers rebuild
         for (const lf of localeFiles) {
@@ -46,33 +49,53 @@ module.exports = new Transformer({
             asset.invalidateOnFileChange(absPath);
         }
 
-        const ui = JSON.parse(fs.readFileSync(path.join(localesDir, `${lang}.json`), 'utf-8'));
+        const ui = JSON.parse(
+            fs.readFileSync(path.join(localesDir, `${lang}.json`), 'utf-8'),
+        );
+
+        // Marked v17+ is ESM-only, so load it dynamically inside the async transform.
+        const { marked } = await import('marked');
 
         // --- Locale key validation (deep) ---
         if (lang !== DEFAULT_LANG) {
-            const baseUI = JSON.parse(fs.readFileSync(path.join(localesDir, `${DEFAULT_LANG}.json`), 'utf-8'));
+            const baseUI = JSON.parse(
+                fs.readFileSync(
+                    path.join(localesDir, `${DEFAULT_LANG}.json`),
+                    'utf-8',
+                ),
+            );
             const missing = [];
             (function findMissing(base, target, prefix) {
                 for (const key of Object.keys(base)) {
-                    const path = prefix ? `${prefix}.${key}` : key;
+                    const keyPath = prefix ? `${prefix}.${key}` : key;
                     if (!(key in target)) {
-                        missing.push(path);
-                    } else if (typeof base[key] === 'object' && base[key] !== null && !Array.isArray(base[key])) {
-                        if (typeof target[key] === 'object' && target[key] !== null && !Array.isArray(target[key])) {
-                            findMissing(base[key], target[key], path);
+                        missing.push(keyPath);
+                    } else if (
+                        typeof base[key] === 'object' &&
+                        base[key] !== null &&
+                        !Array.isArray(base[key])
+                    ) {
+                        if (
+                            typeof target[key] === 'object' &&
+                            target[key] !== null &&
+                            !Array.isArray(target[key])
+                        ) {
+                            findMissing(base[key], target[key], keyPath);
                         }
                     }
                 }
             })(baseUI, ui, '');
             if (missing.length > 0) {
-                console.warn(`[parcel-transformer-cornerstone] ${lang} is missing keys: ${missing.join(', ')}`);
+                console.warn(
+                    `[parcel-transformer-cornerstone] ${lang} is missing keys: ${missing.join(', ')}`,
+                );
             }
         }
 
         // --- Build languages array for navbar ---
-        const languages = allLangCodes.map(l => ({
+        const languages = allLangCodes.map((l) => ({
             code: l,
-            href: l === DEFAULT_LANG ? '/' : `/${l}/`,
+            href: l === DEFAULT_LANG ? '/' : `/${l}`,
             active: l === lang,
         }));
 
@@ -103,46 +126,63 @@ module.exports = new Transformer({
                     for (const file of fs.readdirSync(dir)) {
                         const abs = path.join(dir, file);
                         if (fs.statSync(abs).isDirectory()) {
-                            walk(abs, relativePath ? `${relativePath}/${file}` : file);
+                            walk(
+                                abs,
+                                relativePath ? `${relativePath}/${file}` : file,
+                            );
                         } else if (file.endsWith('.md')) {
                             asset.invalidateOnFileChange(abs);
                             const raw = fs.readFileSync(abs, 'utf-8');
                             const { attributes } = frontMatter(raw);
                             const slug = path.parse(file).name;
-                            const rel = relativePath ? `${relativePath}/${slug}` : slug;
-                            const langPrefix = lang === DEFAULT_LANG ? '' : `/${lang}`;
+                            const rel = relativePath
+                                ? `${relativePath}/${slug}`
+                                : slug;
+                            const langPrefix =
+                                lang === DEFAULT_LANG ? '' : `/${lang}`;
                             posts.push({
                                 ...attributes,
                                 slug,
-                                url: `${langPrefix}/${rel}/`,
+                                url: `${langPrefix}/${rel}`,
                             });
                         }
                     }
                 };
                 walk(scanDir, '');
-                posts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+                posts.sort((a, b) =>
+                    (b.date || '').localeCompare(a.date || ''),
+                );
             }
         }
 
         // Invalidate when new .md files are created
-        asset.invalidateOnFileCreate({ glob: path.join(contentDir, '**/*.md').replace(/\\/g, '/') });
+        asset.invalidateOnFileCreate({
+            glob: path.join(contentDir, '**/*.md').replace(/\\/g, '/'),
+        });
 
         // --- Resolve <include> tags recursively (with cycle detection) ---
         function resolveIncludes(html, ancestors = new Set()) {
             return html.replace(INCLUDE_RE, (_, src) => {
                 const absInclude = path.join(srcDir, src);
                 if (ancestors.has(absInclude)) {
-                    console.error(`[parcel-transformer-cornerstone] Circular include detected: ${absInclude}`);
+                    console.error(
+                        `[parcel-transformer-cornerstone] Circular include detected: ${absInclude}`,
+                    );
                     return '';
                 }
                 if (!fs.existsSync(absInclude)) {
-                    console.warn(`[parcel-transformer-cornerstone] Include not found: ${absInclude}`);
+                    console.warn(
+                        `[parcel-transformer-cornerstone] Include not found: ${absInclude}`,
+                    );
                     return '';
                 }
                 asset.invalidateOnFileChange(absInclude);
                 const next = new Set(ancestors);
                 next.add(absInclude);
-                return resolveIncludes(fs.readFileSync(absInclude, 'utf-8'), next);
+                return resolveIncludes(
+                    fs.readFileSync(absInclude, 'utf-8'),
+                    next,
+                );
             });
         }
 
@@ -150,9 +190,12 @@ module.exports = new Transformer({
 
         // Normalize multiline {{ }} and {{{ }}} expressions to single-line
         // so the posthtml parser doesn't split them across text nodes
-        processed = processed.replace(/\{\{(\{?)([\s\S]*?)(\}?)\}\}/g, (_, open, expr, close) => {
-            return `{{${open} ${expr.trim()} ${close}}}`;
-        });
+        processed = processed.replace(
+            /\{\{(\{?)([\s\S]*?)(\}?)\}\}/g,
+            (_, open, expr, close) => {
+                return `{{${open} ${expr.trim()} ${close}}}`;
+            },
+        );
 
         // Strip data-content attribute from output
         processed = processed.replace(/\s*data-content="[^"]*"/g, '');
@@ -166,9 +209,9 @@ module.exports = new Transformer({
             locals.posts = posts;
         }
 
-        const result = await posthtml([
-            expressions({ locals }),
-        ]).process(processed);
+        const result = await posthtml([expressions({ locals })]).process(
+            processed,
+        );
 
         processed = result.html;
 

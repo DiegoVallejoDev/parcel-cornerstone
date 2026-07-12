@@ -1,8 +1,8 @@
 {
   "version": 2,
   "public": false,
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build",
+  "installCommand": "corepack enable && pnpm install",
+  "buildCommand": "corepack enable && pnpm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
@@ -10,17 +10,29 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'"
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
         },
         {
-          "key": "Link",
-          "value": "</>; rel=\"alternate\"; hreflang=\"es\", </en/>; rel=\"alternate\"; hreflang=\"en\""
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'"
         }
       ]
     },
@@ -47,13 +59,25 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "query", "key": "lang", "value": "es" }],
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "es"
+        }
+      ],
       "destination": "/",
       "permanent": true
     },
     {
       "source": "/",
-      "has": [{ "type": "query", "key": "lang", "value": "en" }],
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
       "destination": "/en",
       "permanent": true
     }

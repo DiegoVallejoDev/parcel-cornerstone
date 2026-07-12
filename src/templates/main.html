@@ -1,25 +1,33 @@
 <include src="templates/components/navbar.html"></include>
 
-<main id="main-content" class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6 stagger" role="main">
+<main
+    id="main-content"
+    class="flex-1 max-w-4xl w-full mx-auto mt-10 p-6 space-y-6 stagger"
+    role="main"
+>
     <header class="card p-8 animate-fade-in-up">
-        <h1 class="text-3xl heading-gradient">
-            {{ ui.title }}
-        </h1>
+        <h1 class="text-3xl heading-gradient">{{ ui.title }}</h1>
         <p class="text-gray-500 dark:text-gray-400 mt-2">{{ ui.subtitle }}</p>
     </header>
 
     <section class="card" aria-labelledby="features-heading">
-        <h2 id="features-heading" class="text-lg font-semibold mb-4">{{ ui.features.title }}</h2>
+        <h2 id="features-heading" class="text-lg font-semibold mb-4">
+            {{ ui.features.title }}
+        </h2>
         <include src="templates/components/features.html"></include>
     </section>
 
     <section class="card" aria-labelledby="counter-heading">
-        <h2 id="counter-heading" class="text-lg font-semibold mb-4">{{ ui.counter.title }}</h2>
+        <h2 id="counter-heading" class="text-lg font-semibold mb-4">
+            {{ ui.counter.title }}
+        </h2>
         <include src="templates/components/counter.html"></include>
     </section>
 
     <section id="about" class="card" aria-labelledby="about-heading">
-        <h2 id="about-heading" class="text-lg font-semibold mb-4">{{ ui.about.title }}</h2>
+        <h2 id="about-heading" class="text-lg font-semibold mb-4">
+            {{ ui.about.title }}
+        </h2>
         <include src="templates/components/about.html"></include>
     </section>
 
@@ -45,15 +53,22 @@
                 <div x-data>
                     <h3 class="section-label mb-3">Toasts</h3>
                     <div class="flex gap-2 flex-wrap">
-                        <button @click="$store.toasts.add('{{ ui.toasts.successMsg }}', 'success')"
-                            class="btn-accent bg-green-600 hover:bg-green-700">
+                        <button
+                            @click="$store.toasts.add('{{ ui.toasts.successMsg }}', 'success')"
+                            class="btn-accent bg-green-600 hover:bg-green-700"
+                        >
                             {{ ui.toasts.success }}
                         </button>
-                        <button @click="$store.toasts.add('{{ ui.toasts.infoMsg }}', 'info')" class="btn-accent">
+                        <button
+                            @click="$store.toasts.add('{{ ui.toasts.infoMsg }}', 'info')"
+                            class="btn-accent"
+                        >
                             {{ ui.toasts.info }}
                         </button>
-                        <button @click="$store.toasts.add('{{ ui.toasts.errorMsg }}', 'error')"
-                            class="btn-accent bg-red-600 hover:bg-red-700">
+                        <button
+                            @click="$store.toasts.add('{{ ui.toasts.errorMsg }}', 'error')"
+                            class="btn-accent bg-red-600 hover:bg-red-700"
+                        >
                             {{ ui.toasts.error }}
                         </button>
                     </div>

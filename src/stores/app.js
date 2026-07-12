@@ -2,8 +2,11 @@ export default {
     theme: localStorage.getItem('theme') || 'system',
 
     get isDark() {
-        return this.theme === 'dark' ||
-            (this.theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        return (
+            this.theme === 'dark' ||
+            (this.theme === 'system' &&
+                matchMedia('(prefers-color-scheme: dark)').matches)
+        );
     },
 
     toggleTheme() {
@@ -16,9 +19,12 @@ export default {
         this._apply();
 
         // React to OS theme changes while in 'system' mode
-        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (this.theme === 'system') this._apply();
-        });
+        matchMedia('(prefers-color-scheme: dark)').addEventListener(
+            'change',
+            () => {
+                if (this.theme === 'system') this._apply();
+            },
+        );
 
         // Sync across tabs / language navigation
         window.addEventListener('storage', (e) => {

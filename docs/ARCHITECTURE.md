@@ -134,7 +134,7 @@ graph LR
 Alpine.js bootstraps in `src/index.js` and registers:
 
 | Store / Data   | Purpose                                  |
-|----------------|------------------------------------------|
+| -------------- | ---------------------------------------- |
 | `app` store    | Theme state (light / dark / system)      |
 | `toasts` store | Toast notification queue                 |
 | `counter` data | Simple counter component state           |
@@ -237,7 +237,7 @@ graph LR
 ## Technology Stack
 
 | Layer         | Technology                              |
-|---------------|-----------------------------------------|
+| ------------- | --------------------------------------- |
 | Bundler       | Parcel 2                                |
 | Transformer   | parcel-transformer-cornerstone (custom) |
 | Templating    | posthtml-expressions (build-time)       |

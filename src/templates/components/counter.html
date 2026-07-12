@@ -1,18 +1,40 @@
-<div x-data="counter" class="flex flex-col sm:flex-row items-center justify-between gap-4">
+<div
+    x-data="counter"
+    class="flex flex-col sm:flex-row items-center justify-between gap-4"
+>
     <div class="text-center sm:text-left">
-        <p class="text-sm text-gray-500 dark:text-gray-400">{{ ui.counter.description }}</p>
-        <p class="text-5xl font-bold mt-2 tabular-nums transition-all duration-150" x-text="count"
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+            {{ ui.counter.description }}
+        </p>
+        <p
+            class="text-5xl font-bold mt-2 tabular-nums transition-all duration-150"
+            x-text="count"
             :class="count > 0 ? 'text-green-600 dark:text-green-400' : count < 0 ? 'text-red-600 dark:text-red-400' : ''"
-            role="status" aria-live="polite" :aria-label="'{{ ui.counter.title }}: ' + count"></p>
+            role="status"
+            aria-live="polite"
+            :aria-label="'{{ ui.counter.title }}: ' + count"
+        ></p>
     </div>
     <div class="flex gap-2" role="group" aria-label="{{ ui.counter.controls }}">
-        <button x-on:click="count--" aria-label="{{ ui.counter.decrement }}" class="btn-secondary font-bold text-lg">
+        <button
+            x-on:click="count--"
+            aria-label="{{ ui.counter.decrement }}"
+            class="btn-secondary font-bold text-lg"
+        >
             &minus;
         </button>
-        <button x-on:click="count++" aria-label="{{ ui.counter.increment }}" class="btn-primary font-bold text-lg">
+        <button
+            x-on:click="count++"
+            aria-label="{{ ui.counter.increment }}"
+            class="btn-primary font-bold text-lg"
+        >
             &plus;
         </button>
-        <button x-on:click="count = 0" aria-label="{{ ui.counter.reset }}" class="btn-ghost text-xs">
+        <button
+            x-on:click="count = 0"
+            aria-label="{{ ui.counter.reset }}"
+            class="btn-ghost text-xs"
+        >
             {{ ui.counter.reset }}
         </button>
     </div>

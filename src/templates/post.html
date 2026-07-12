@@ -2,14 +2,30 @@
 
 <article class="max-w-3xl mx-auto px-4 py-8 animate-fade-in-up">
     <header class="mb-8">
-        <a href="/" class="btn-ghost text-sm mb-4 inline-flex items-center gap-1">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        <a
+            href="/"
+            class="btn-ghost text-sm mb-4 inline-flex items-center gap-1"
+        >
+            <svg
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                />
             </svg>
             Back to Home
         </a>
         <h1 class="text-4xl heading-gradient mb-2">{{ post.title }}</h1>
-        <div class="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2">
+        <div
+            class="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2"
+        >
             <span>{{ post.date }}</span>
             <span class="text-gray-300 dark:text-gray-600">&bull;</span>
             <span>{{ post.author }}</span>
@@ -21,9 +37,7 @@
         </div>
     </header>
 
-    <div class="prose max-w-none">
-        {{{ post.content }}}
-    </div>
+    <div class="prose max-w-none">{{{ post.content }}}</div>
 </article>
 
 <include src="templates/components/footer.html" />

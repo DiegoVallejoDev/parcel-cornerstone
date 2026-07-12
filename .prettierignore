@@ -1,5 +1,6 @@
-dist
-.build
-.parcel-cache
-node_modules
+.build/
+dist/
+dist-*/
+.parcel-cache/
+node_modules/
 pnpm-lock.yaml

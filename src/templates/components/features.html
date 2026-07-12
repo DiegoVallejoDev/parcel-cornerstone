@@ -1,12 +1,22 @@
-<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger" role="list">
+<div
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger"
+    role="list"
+>
     <each loop="feature in ui.features.items">
         <article
             class="group p-5 rounded-xl text-center border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50"
-            role="listitem">
-            <div class="text-3xl mb-2 transition-transform duration-300 group-hover:scale-110" aria-hidden="true">{{
-                feature.icon }}</div>
+            role="listitem"
+        >
+            <div
+                class="text-3xl mb-2 transition-transform duration-300 group-hover:scale-110"
+                aria-hidden="true"
+            >
+                {{ feature.icon }}
+            </div>
             <h3 class="text-sm font-semibold">{{ feature.title }}</h3>
-            <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">{{ feature.desc }}</p>
+            <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                {{ feature.desc }}
+            </p>
             <if condition="feature.button">
                 <div class="mt-4">
                     <a href="/non-existent-page" class="btn-accent text-xs">

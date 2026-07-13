@@ -11,6 +11,11 @@ Alpine.store('loading', loading);
 Alpine.store('confirm', confirm);
 Alpine.store('clipboard', clipboard);
 
+const toastsStore = Alpine.store('toasts');
+const loadingStore = Alpine.store('loading');
+const confirmStore = Alpine.store('confirm');
+const clipboardStore = Alpine.store('clipboard');
+
 Alpine.data('counter', () => ({ count: 0 }));
 
 Alpine.data('modal', () => ({ open: false }));
@@ -72,6 +77,18 @@ Alpine.data('tooltip', () => ({
 
 Alpine.data('clipboard', () => ({
     text: '',
+    successLabel: '',
+    errorLabel: '',
+    init() {
+        this.successLabel = this.$el.dataset.successLabel;
+        this.errorLabel = this.$el.dataset.errorLabel;
+    },
+    copy() {
+        clipboardStore
+            .copy(this.text)
+            .then(() => toastsStore.add(this.successLabel, 'success'))
+            .catch(() => toastsStore.add(this.errorLabel, 'error'));
+    },
 }));
 
 Alpine.data('filter', () => ({
@@ -122,8 +139,44 @@ Alpine.data('scrollReveal', (initial = {}) => ({
 
 Alpine.data('skeleton', () => ({
     active: false,
+    loadingLabel: '',
+    toggleLabel: '',
+    init() {
+        this.loadingLabel = this.$el.dataset.loadingLabel;
+        this.toggleLabel = this.$el.dataset.toggleLabel;
+    },
     toggle() {
         this.active = !this.active;
+    },
+}));
+
+Alpine.data('confirmButton', () => ({
+    message: '',
+    success: '',
+    init() {
+        this.message = this.$el.dataset.message;
+        this.success = this.$el.dataset.success;
+    },
+    openConfirm() {
+        confirmStore.open(this.message, () =>
+            toastsStore.add(this.success, 'success'),
+        );
+    },
+}));
+
+Alpine.data('loadingButton', () => ({
+    message: '',
+    done: '',
+    init() {
+        this.message = this.$el.dataset.message;
+        this.done = this.$el.dataset.done;
+    },
+    showLoading() {
+        loadingStore.show(this.message);
+        window.setTimeout(() => {
+            loadingStore.hide();
+            toastsStore.add(this.done, 'success');
+        }, 2000);
     },
 }));
 

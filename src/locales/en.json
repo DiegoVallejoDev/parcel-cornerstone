@@ -104,7 +104,8 @@
       "label": "Copy to clipboard",
       "placeholder": "Type something to copy...",
       "button": "Copy",
-      "success": "Copied to clipboard!"
+      "success": "Copied to clipboard!",
+      "error": "Failed to copy to clipboard."
     },
     "loading": {
       "title": "Loading",

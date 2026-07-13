@@ -29,7 +29,10 @@
             <include src="templates/components/loading.html"></include>
             <button
                 type="button"
-                @click="$store.loading.show('{{ ui.services.loading.message }}'); setTimeout(() => { $store.loading.hide(); $store.toasts.add('{{ ui.services.loading.done }}', 'success'); }, 2000)"
+                x-data="loadingButton"
+                data-message="{{ ui.services.loading.message }}"
+                data-done="{{ ui.services.loading.done }}"
+                @click="showLoading"
                 class="btn-accent mt-3"
             >
                 {{ ui.services.loading.show }}
@@ -41,7 +44,10 @@
             <include src="templates/components/confirm.html"></include>
             <button
                 type="button"
-                @click="$store.confirm.open('{{ ui.services.confirm.message }}', () => $store.toasts.add('{{ ui.services.confirm.success }}', 'success'))"
+                x-data="confirmButton"
+                data-message="{{ ui.services.confirm.message }}"
+                data-success="{{ ui.services.confirm.success }}"
+                @click="openConfirm"
                 class="btn-accent mt-3"
             >
                 {{ ui.services.confirm.title }}

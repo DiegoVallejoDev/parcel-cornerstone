@@ -1,4 +1,9 @@
-<div x-data="skeleton" class="card">
+<div
+    x-data="skeleton"
+    data-loading-label="{{ ui.services.skeleton.loading }}"
+    data-toggle-label="{{ ui.services.skeleton.toggle }}"
+    class="card"
+>
     <h3
         class="text-lg font-semibold mb-2 transition-all"
         :class="{ 'skeleton skeleton-text h-8': active }"
@@ -15,6 +20,6 @@
         type="button"
         @click="toggle"
         class="btn-secondary mt-4"
-        x-text="active ? '{{ ui.services.skeleton.loading }}' : '{{ ui.services.skeleton.toggle }}'"
+        x-text="active ? loadingLabel : toggleLabel"
     ></button>
 </div>

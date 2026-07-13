@@ -104,7 +104,8 @@
       "label": "Copiar al portapapeles",
       "placeholder": "Escribe algo para copiar...",
       "button": "Copiar",
-      "success": "¡Copiado al portapapeles!"
+      "success": "¡Copiado al portapapeles!",
+      "error": "No se pudo copiar al portapapeles."
     },
     "loading": {
       "title": "Carga",

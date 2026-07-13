@@ -1,0 +1,18 @@
+<div x-data="filter" class="w-full max-w-md mx-auto">
+    <input
+        x-model="query"
+        type="text"
+        placeholder="{{ ui.services.filter.placeholder }}"
+        class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+    <ul class="mt-4 space-y-2">
+        <each loop="item in ui.services.filter.items">
+            <li
+                x-show="!query || $el.textContent.toLowerCase().includes(query.toLowerCase())"
+                class="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+            >
+                {{ item }}
+            </li>
+        </each>
+    </ul>
+</div>

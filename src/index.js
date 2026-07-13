@@ -1,12 +1,20 @@
 import Alpine from 'alpinejs';
 import app from './stores/app.js';
 import toasts from './stores/toasts.js';
+import loading from './stores/loading.js';
+import confirm from './stores/confirm.js';
+import clipboard from './stores/clipboard.js';
 
 Alpine.store('app', app);
 Alpine.store('toasts', toasts);
+Alpine.store('loading', loading);
+Alpine.store('confirm', confirm);
+Alpine.store('clipboard', clipboard);
 
 Alpine.data('counter', () => ({ count: 0 }));
+
 Alpine.data('modal', () => ({ open: false }));
+
 Alpine.data('toastItem', () => ({
     show: true,
     iconColor(type) {
@@ -29,6 +37,93 @@ Alpine.data('toastItem', () => ({
                 error: 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
             }[type] || ''
         );
+    },
+}));
+
+Alpine.data('dropdown', () => ({
+    open: false,
+    toggle() {
+        this.open = !this.open;
+    },
+    close() {
+        this.open = false;
+    },
+}));
+
+Alpine.data('drawer', () => ({
+    open: false,
+    toggle() {
+        this.open = !this.open;
+    },
+    close() {
+        this.open = false;
+    },
+}));
+
+Alpine.data('tooltip', () => ({
+    visible: false,
+    show() {
+        this.visible = true;
+    },
+    hide() {
+        this.visible = false;
+    },
+}));
+
+Alpine.data('clipboard', () => ({
+    text: '',
+}));
+
+Alpine.data('filter', () => ({
+    query: '',
+}));
+
+Alpine.data('carousel', (initial = {}) => ({
+    active: 0,
+    count: initial.count || 0,
+    interval: initial.interval || 0,
+    timer: null,
+    init() {
+        if (this.interval > 0) {
+            this.timer = window.setInterval(() => this.next(), this.interval);
+        }
+    },
+    destroy() {
+        if (this.timer) {
+            window.clearInterval(this.timer);
+        }
+    },
+    next() {
+        this.active = (this.active + 1) % this.count;
+    },
+    prev() {
+        this.active = (this.active - 1 + this.count) % this.count;
+    },
+}));
+
+Alpine.data('scrollReveal', (initial = {}) => ({
+    visible: false,
+    threshold: initial.threshold || 0.2,
+    init() {
+        const observer = new window.IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        this.visible = true;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: this.threshold },
+        );
+        observer.observe(this.$el);
+    },
+}));
+
+Alpine.data('skeleton', () => ({
+    active: false,
+    toggle() {
+        this.active = !this.active;
     },
 }));
 

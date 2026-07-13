@@ -77,5 +77,98 @@
     "successMsg": "Operation successful!",
     "infoMsg": "Just so you know...",
     "errorMsg": "Something went wrong."
+  },
+  "services": {
+    "title": "Framework Services",
+    "dropdown": {
+      "title": "Dropdown",
+      "label": "Open dropdown",
+      "items": [
+        { "label": "Profile", "href": "#" },
+        { "label": "Settings", "href": "#" },
+        { "label": "Sign out", "href": "#" }
+      ]
+    },
+    "drawer": {
+      "title": "Drawer",
+      "open": "Open drawer",
+      "content": "This is a slide-in drawer. It uses x-teleport to move to the body and supports Escape to close."
+    },
+    "tooltip": {
+      "title": "Tooltip",
+      "button": "Hover for tooltip",
+      "text": "This is a tooltip."
+    },
+    "clipboard": {
+      "title": "Clipboard",
+      "label": "Copy to clipboard",
+      "placeholder": "Type something to copy...",
+      "button": "Copy",
+      "success": "Copied to clipboard!"
+    },
+    "loading": {
+      "title": "Loading",
+      "show": "Show loading",
+      "message": "Loading...",
+      "done": "Loaded!"
+    },
+    "confirm": {
+      "title": "Confirm",
+      "message": "Are you sure you want to continue?",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "success": "Confirmed!"
+    },
+    "filter": {
+      "title": "Filter",
+      "placeholder": "Search...",
+      "items": ["Parcel", "Alpine.js", "Tailwind CSS", "Vercel", "PostHTML"]
+    },
+    "carousel": {
+      "title": "Carousel",
+      "prev": "Previous",
+      "next": "Next",
+      "slides": [
+        {
+          "title": "Parcel",
+          "desc": "Zero-config bundler with HMR and optimized builds."
+        },
+        {
+          "title": "Alpine.js",
+          "desc": "Lightweight, Vue-like reactivity without the build step."
+        },
+        {
+          "title": "Tailwind CSS",
+          "desc": "Utility-first CSS for rapid UI development."
+        },
+        {
+          "title": "Vercel",
+          "desc": "Static CDN and serverless functions in one place."
+        }
+      ]
+    },
+    "scrollReveal": {
+      "title": "Scroll Reveal",
+      "cards": [
+        {
+          "title": "Fast",
+          "desc": "Optimized static builds."
+        },
+        {
+          "title": "Reactive",
+          "desc": "Alpine.js interactivity."
+        },
+        {
+          "title": "Accessible",
+          "desc": "ARIA roles and keyboard support."
+        }
+      ]
+    },
+    "skeleton": {
+      "title": "Skeleton",
+      "description": "Toggle skeleton loading state.",
+      "toggle": "Toggle skeleton",
+      "loading": "Loading..."
+    }
   }
 }

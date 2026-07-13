@@ -1,0 +1,16 @@
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <each loop="card in ui.services.scrollReveal.cards">
+        <div
+            x-data="scrollReveal"
+            x-bind:class="{ 'opacity-0 translate-y-4': !visible, 'opacity-100 translate-y-0': visible }"
+            class="card transition-all duration-700 ease-out"
+        >
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+                {{ card.title }}
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                {{ card.desc }}
+            </p>
+        </div>
+    </each>
+</div>

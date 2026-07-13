@@ -1,0 +1,20 @@
+<div x-data="skeleton" class="card">
+    <h3
+        class="text-lg font-semibold mb-2 transition-all"
+        :class="{ 'skeleton skeleton-text h-8': active }"
+    >
+        {{ ui.services.skeleton.title }}
+    </h3>
+    <p
+        class="text-gray-600 dark:text-gray-400 transition-all"
+        :class="{ 'skeleton skeleton-text h-4 w-3/4': active }"
+    >
+        {{ ui.services.skeleton.description }}
+    </p>
+    <button
+        type="button"
+        @click="toggle"
+        class="btn-secondary mt-4"
+        x-text="active ? '{{ ui.services.skeleton.loading }}' : '{{ ui.services.skeleton.toggle }}'"
+    ></button>
+</div>

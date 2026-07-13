@@ -1,0 +1,71 @@
+<div class="space-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <h3 class="section-label mb-3">{{ ui.services.dropdown.title }}</h3>
+            <include src="templates/components/dropdown.html"></include>
+        </div>
+
+        <div>
+            <h3 class="section-label mb-3">{{ ui.services.drawer.title }}</h3>
+            <include src="templates/components/drawer.html"></include>
+        </div>
+
+        <div>
+            <h3 class="section-label mb-3">{{ ui.services.tooltip.title }}</h3>
+            <include src="templates/components/tooltip.html"></include>
+        </div>
+
+        <div>
+            <h3 class="section-label mb-3">
+                {{ ui.services.clipboard.title }}
+            </h3>
+            <include src="templates/components/clipboard.html"></include>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <h3 class="section-label mb-3">{{ ui.services.loading.title }}</h3>
+            <include src="templates/components/loading.html"></include>
+            <button
+                type="button"
+                @click="$store.loading.show('{{ ui.services.loading.message }}'); setTimeout(() => { $store.loading.hide(); $store.toasts.add('{{ ui.services.loading.done }}', 'success'); }, 2000)"
+                class="btn-accent mt-3"
+            >
+                {{ ui.services.loading.show }}
+            </button>
+        </div>
+
+        <div>
+            <h3 class="section-label mb-3">{{ ui.services.confirm.title }}</h3>
+            <include src="templates/components/confirm.html"></include>
+            <button
+                type="button"
+                @click="$store.confirm.open('{{ ui.services.confirm.message }}', () => $store.toasts.add('{{ ui.services.confirm.success }}', 'success'))"
+                class="btn-accent mt-3"
+            >
+                {{ ui.services.confirm.title }}
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="section-label mb-3">{{ ui.services.filter.title }}</h3>
+        <include src="templates/components/filter.html"></include>
+    </div>
+
+    <div>
+        <h3 class="section-label mb-3">{{ ui.services.carousel.title }}</h3>
+        <include src="templates/components/carousel.html"></include>
+    </div>
+
+    <div>
+        <h3 class="section-label mb-3">{{ ui.services.scrollReveal.title }}</h3>
+        <include src="templates/components/scroll-reveal.html"></include>
+    </div>
+
+    <div>
+        <h3 class="section-label mb-3">{{ ui.services.skeleton.title }}</h3>
+        <include src="templates/components/skeleton.html"></include>
+    </div>
+</div>

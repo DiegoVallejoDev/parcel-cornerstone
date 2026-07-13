@@ -1,0 +1,24 @@
+<div x-data="clipboard" class="flex flex-col gap-2">
+    <label
+        for="clipboard-demo"
+        class="text-sm text-gray-600 dark:text-gray-400"
+    >
+        {{ ui.services.clipboard.label }}
+    </label>
+    <div class="flex gap-2">
+        <input
+            x-model="text"
+            id="clipboard-demo"
+            type="text"
+            placeholder="{{ ui.services.clipboard.placeholder }}"
+            class="flex-1 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+            type="button"
+            @click="$store.clipboard.copy(text).then(() => $store.toasts.add('{{ ui.services.clipboard.success }}', 'success'))"
+            class="btn-accent"
+        >
+            {{ ui.services.clipboard.button }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div
+    x-data="carousel({ count: {{ ui.services.carousel.slides.length }} })"
+    class="w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
+>
+    <div class="relative h-48">
+        <each loop="slide in ui.services.carousel.slides">
+            <div
+                x-show="active === {{ loop.index }}"
+                style="display: none"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="absolute inset-0 p-6 flex flex-col items-center justify-center text-center"
+            >
+                <h3
+                    class="text-lg font-semibold text-gray-900 dark:text-gray-100"
+                >
+                    {{ slide.title }}
+                </h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    {{ slide.desc }}
+                </p>
+            </div>
+        </each>
+    </div>
+
+    <div
+        class="flex justify-between items-center px-4 py-3 border-t border-gray-200 dark:border-gray-700"
+    >
+        <button type="button" @click="prev" class="btn-secondary text-xs">
+            {{ ui.services.carousel.prev }}
+        </button>
+        <div class="flex gap-2">
+            <template x-for="i in count" :key="i">
+                <button
+                    type="button"
+                    @click="active = i - 1"
+                    class="w-2 h-2 rounded-full"
+                    :class="active === i - 1 ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'"
+                    :aria-label="'Slide ' + i"
+                ></button>
+            </template>
+        </div>
+        <button type="button" @click="next" class="btn-secondary text-xs">
+            {{ ui.services.carousel.next }}
+        </button>
+    </div>
+</div>

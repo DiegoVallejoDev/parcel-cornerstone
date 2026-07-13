@@ -1,0 +1,54 @@
+<div x-data="dropdown" class="relative inline-block text-left">
+    <button
+        type="button"
+        @click="toggle"
+        @keydown.escape.window="close"
+        class="btn-secondary"
+        aria-haspopup="true"
+        :aria-expanded="open"
+    >
+        {{ ui.services.dropdown.label }}
+        <svg
+            class="w-4 h-4 ml-2 transition-transform duration-200"
+            :class="open ? 'rotate-180' : ''"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+            />
+        </svg>
+    </button>
+
+    <div
+        x-show="open"
+        style="display: none"
+        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        @click.away="close"
+        class="absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+        role="menu"
+        aria-orientation="vertical"
+    >
+        <div class="py-1" role="none">
+            <each loop="item in ui.services.dropdown.items">
+                <a
+                    href="{{ item.href || '#' }}"
+                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    role="menuitem"
+                >
+                    {{ item.label }}
+                </a>
+            </each>
+        </div>
+    </div>
+</div>

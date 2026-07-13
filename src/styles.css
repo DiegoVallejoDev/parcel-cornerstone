@@ -209,3 +209,12 @@
 .stagger > *:nth-child(8) {
     animation-delay: 420ms;
 }
+
+/* ── Skeleton placeholders ── */
+.skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
+}
+
+.skeleton-text {
+    @apply h-4 w-full;
+}

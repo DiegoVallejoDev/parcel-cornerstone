@@ -77,5 +77,98 @@
     "successMsg": "¡Operación exitosa!",
     "infoMsg": "Para tu información...",
     "errorMsg": "Algo salió mal."
+  },
+  "services": {
+    "title": "Servicios del Framework",
+    "dropdown": {
+      "title": "Menú desplegable",
+      "label": "Abrir menú",
+      "items": [
+        { "label": "Perfil", "href": "#" },
+        { "label": "Configuración", "href": "#" },
+        { "label": "Cerrar sesión", "href": "#" }
+      ]
+    },
+    "drawer": {
+      "title": "Panel lateral",
+      "open": "Abrir panel",
+      "content": "Este es un panel lateral. Usa x-teleport para moverse al body y Escape para cerrar."
+    },
+    "tooltip": {
+      "title": "Tooltip",
+      "button": "Pasa el cursor",
+      "text": "Este es un tooltip."
+    },
+    "clipboard": {
+      "title": "Portapapeles",
+      "label": "Copiar al portapapeles",
+      "placeholder": "Escribe algo para copiar...",
+      "button": "Copiar",
+      "success": "¡Copiado al portapapeles!"
+    },
+    "loading": {
+      "title": "Carga",
+      "show": "Mostrar carga",
+      "message": "Cargando...",
+      "done": "¡Cargado!"
+    },
+    "confirm": {
+      "title": "Confirmar",
+      "message": "¿Estás seguro de que deseas continuar?",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "success": "¡Confirmado!"
+    },
+    "filter": {
+      "title": "Filtro",
+      "placeholder": "Buscar...",
+      "items": ["Parcel", "Alpine.js", "Tailwind CSS", "Vercel", "PostHTML"]
+    },
+    "carousel": {
+      "title": "Carrusel",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "slides": [
+        {
+          "title": "Parcel",
+          "desc": "Bundler sin configuración con HMR y builds optimizados."
+        },
+        {
+          "title": "Alpine.js",
+          "desc": "Reactividad ligera al estilo Vue sin costo de build."
+        },
+        {
+          "title": "Tailwind CSS",
+          "desc": "CSS utility-first para desarrollo rápido de UI."
+        },
+        {
+          "title": "Vercel",
+          "desc": "CDN estático y funciones serverless en un solo lugar."
+        }
+      ]
+    },
+    "scrollReveal": {
+      "title": "Scroll Reveal",
+      "cards": [
+        {
+          "title": "Rápido",
+          "desc": "Builds estáticos optimizados."
+        },
+        {
+          "title": "Reactivo",
+          "desc": "Interactividad con Alpine.js."
+        },
+        {
+          "title": "Accesible",
+          "desc": "Roles ARIA y soporte de teclado."
+        }
+      ]
+    },
+    "skeleton": {
+      "title": "Skeleton",
+      "description": "Activa el estado de carga skeleton.",
+      "toggle": "Alternar skeleton",
+      "loading": "Cargando..."
+    }
   }
 }
